@@ -1,0 +1,14 @@
+<h1>Go forth and create!</h1>
+<div class="media">
+    <div class="media col-md-3">
+        <h4>Ground Rules</h4>
+        <ol>
+            <li>Don't be mean</li>
+            <li>...unless it's creative, but still. Rule #1</li>
+        </ol>
+    </div>
+    
+    <div class="media col-md-8">
+            <%= render partial: 'form', locals: {wiki: @wiki, type: "Create" } %>
+    </div>
+</div>

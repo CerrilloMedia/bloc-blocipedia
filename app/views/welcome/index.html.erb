@@ -1,2 +1,12 @@
-<h1>Welcome#index</h1>
-<p>Find me in app/views/welcome/index.html.erb</p>
+<div class="jumbotron">
+    <h3>
+        <% if current_user %>
+            Returning as: <%= current_user.email %>
+        <% else %>
+        Stay tuned! so perhaps you should 
+            <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link' %> or 
+            <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
+        <% end %>
+    </h3>
+</div>
+<%= link_to "This is what you missed on last weeks episode...", wikis_path, class: 'btn home-pg-btn', title: "click-it or ticket!" %>

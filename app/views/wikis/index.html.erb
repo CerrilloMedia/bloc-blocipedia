@@ -1,0 +1,27 @@
+<h1>So what's on your grey matter?</h1>
+<div class="media">
+    <div class="media-body">
+        <%= link_to "Get Wiki With-it", new_wiki_path, class: 'btn btn-success wiki-index-btn', title: "Create Wiki" %>
+    </div>
+</div>
+
+<div class="col-md-12">
+<h3>Current Wiki's</h3>
+<div class="media">
+    <% @wikis.each   do |w| %>
+        <div class="col-md-6 wiki-index-tile">
+            <h4>
+                <%= link_to w.title, wiki_path(w) %>
+            </h4>
+            <p>Body: <%= w.body %></p>
+            <% if w.private? %>
+                <%= content_tag :span, "", class: 'glyphicon glyphicon-lock' %> private
+            <% else %>
+                <%= content_tag :span, "", class: 'glyphicon glyphicon-eye-open' %> public
+            <% end %>
+            <br/>
+            by: <%= w.user.email %><br/>
+        </div>
+    <% end %>
+</div>
+</div>

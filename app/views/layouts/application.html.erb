@@ -13,7 +13,7 @@
     <!--NAVIGATION BAR-->
     <ul  class="nav nav-tabs">
       <li><%= link_to 'Home', root_path, title: "Blocipedia" %></li>
-      <li><%= link_to 'Show', welcome_show_path, { title: "Your Wikis" } %></li>
+      <li><%= link_to 'Show', wikis_path, { title: "Your Wikis" } %></li>
       
       <% if user_signed_in? %>
         <li>

@@ -1,0 +1,39 @@
+// Place all the styles related to the wiki controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.wiki-body {
+    margin: .3em 0 1em 0em !important;
+}
+
+.wiki-body-content {
+    padding: 1.5em .3em;
+    height: 7em !important;
+    background: rgba(187, 222, 188, 0.35);
+}
+
+.wiki-header {
+    background: #bbdebc;
+    box-shadow: -2px 2px 0px dimgrey;
+    padding: .3em;
+    position: relative;
+}
+
+.wiki-index-tile {
+    background: white !important;
+    box-sizing: border-box;
+    transition: all .5s ease-in 
+}
+
+.wiki-index-tile:hover {
+    background: #e1ffe1 !important;
+}
+
+.wiki-index-btn {
+    width: 50%;
+    border-radius: 0px !important;
+}
+
+.form-group .checkbox {
+    margin-left: 2em !important;
+}

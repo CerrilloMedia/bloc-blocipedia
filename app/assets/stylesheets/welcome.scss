@@ -1,3 +1,17 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.home-pg-btn {
+    border-radius: 0px !important;
+    
+    border: solid 1px black !important;
+    /* background: greenyellow; */
+    color: #69486b;
+    box-shadow: 3px 3px 0px 0px black;
+}
+
+.jumbotron {
+    border-radius: 0px !important;
+    box-shadow: 4px 4px 0 0 darkslategrey;
+}

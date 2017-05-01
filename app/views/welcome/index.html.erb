@@ -2,6 +2,7 @@
     <h3>
         <% if current_user %>
             Returning as: <%= current_user.email %>
+            <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span> New Post"), new_wiki_path, class: 'btn btn-success'%>
         <% else %>
         Stay tuned! so perhaps you should 
             <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link' %> or 
@@ -9,4 +10,6 @@
         <% end %>
     </h3>
 </div>
-<%= link_to "This is what you missed on last weeks episode...", wikis_path, class: 'btn home-pg-btn', title: "click-it or ticket!" %>
+<% if current_user %>
+    <%= link_to "This is what you missed on last weeks episode...", wikis_path, class: 'btn home-pg-btn', title: "click-it or ticket!" %>
+<% end %>

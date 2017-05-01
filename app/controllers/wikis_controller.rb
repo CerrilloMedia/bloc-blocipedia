@@ -1,7 +1,4 @@
 class WikisController < ApplicationController
-
-  before_action :authorized_to_delete?, only: :destroy
-  before_action :authorized_to_edit?, only: :edit
   
   def index
     @wikis = Wiki.all
@@ -31,6 +28,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def update
@@ -39,6 +37,9 @@ class WikisController < ApplicationController
     
     # add expected data through wiki_params
     @wiki.assign_attributes(wiki_params)
+    
+    # Pundit request for update? in WikiPolicy
+    authorize @wiki
     
     if @wiki.save
       flash[:notice] = "Wiki succesfully saved"
@@ -52,6 +53,8 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
+    
+    authorize @wiki
     
     if @wiki.delete
       flash[:notice] = "Wiki [#{ @wiki.title }] succesfully deleted."
@@ -69,22 +72,22 @@ class WikisController < ApplicationController
     params.require(:wiki).permit(:title, :body, :private)
   end
   
-  def authorized_to_edit?
-    wiki = Wiki.find(params[:id])
+  # def authorized_to_edit?
+  #   wiki = Wiki.find(params[:id])
     
-    unless current_user.id == wiki.user_id || !wiki.private
-      flash[:alert] = "You are not authorized to edit this Wiki."
-      redirect_to wiki
-    end
-  end
+  #   unless current_user.id == wiki.user_id || !wiki.private
+  #     flash[:alert] = "You are not authorized to edit this Wiki."
+  #     redirect_to wiki
+  #   end
+  # end
   
-  def authorized_to_delete?
-    wiki = Wiki.find(params[:id])
+  # def authorized_to_delete?
+  #   wiki = Wiki.find(params[:id])
     
-    unless current_user.id == wiki.user_id
-      flash[:alert] = "You are not authorized to delete this Wiki."
-      redirect_to wikis_path
-    end
-  end
+  #   unless current_user.id == wiki.user_id
+  #     flash[:alert] = "You are not authorized to delete this Wiki."
+  #     redirect_to wikis_path
+  #   end
+  # end
   
 end

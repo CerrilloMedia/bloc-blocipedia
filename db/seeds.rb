@@ -5,26 +5,24 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-
-require 'random_data'
+require 'faker'
 
 10.times do
-    User.create!(
-        email: RandomData.random_email,
-        password: "password"
-    )
+    email = Faker::Internet.email
+    password = Faker::Internet.password
+    User.create!( email: email, password: password )
 end
 
 users = User.all
 
 20.times do
     Wiki.create!(
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph,
+        title: Faker::Lorem.sentence(5),
+        body: Faker::Lorem.paragraph(3,false,4),
         user: users.sample,
-        private: [true,false].sample
+        private: [true,false, false].sample
         )
 end
 
-puts "#{User.all.count} sample users created!"
-puts "#{Wiki.all.count} sample Wikis created!"
+puts "#{Wiki.all.count} wiki's created."
+puts "#{User.all.count} users created."

@@ -11,10 +11,15 @@
     <% @wikis.each   do |w| %>
         <div class="col-md-6 wiki-index-tile">
             <h4>
-                <%= link_to w.title, wiki_path(w) %>
+                <% if !w.private || policy(current_user).author?(w) %>
+                    <%= link_to w.title, wiki_path(w) %>
+                <% else %>
+                    <%= content_tag :a, w.title %>
+                <% end %>
             </h4>
-            <p>Body: <%= w.body %></p>
-            <% if w.private? %>
+            <%= content_tag :p, w.body, class: 'wiki-tile-body' %>
+            
+            <% if w.private %>
                 <%= content_tag :span, "", class: 'glyphicon glyphicon-lock' %> private
             <% else %>
                 <%= content_tag :span, "", class: 'glyphicon glyphicon-eye-open' %> public

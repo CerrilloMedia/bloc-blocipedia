@@ -1,0 +1,14 @@
+<h1>Become a premium member!</h1>
+<div class="col-md-12">
+    <div class="center-block col-md-6">
+    <%= form_tag charges_path do %>
+        <div class="form-group">
+            <h4>Membership Fee: $15</h4>
+        </div>
+        <p><script class='stripe-button' src="https://checkout.stripe.com/checkout.js" data-key="<%= @stripe_btn_data[:key] %>" data-amount="<%= @stripe_btn_data[:amount] %>" data-description="<%= @stripe_btn_data[:description] %>" ></script>
+        </p>
+        
+        <a href="https://www.stripe.com"><%= image_tag "StripeBadges/SolidDark/powered_by_stripe.png" %></a>
+    <% end %>
+    </div>
+</div>

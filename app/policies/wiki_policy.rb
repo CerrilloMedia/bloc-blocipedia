@@ -7,16 +7,30 @@ class WikiPolicy < ApplicationPolicy
         @wiki = wiki
     end
     
+    def show?
+        editable?
+    end
+    
     def edit?
-        user.present? && ( !wiki.private || wiki.user_id == user.id || user.admin? )
+        editable?
     end
     
     def update?
-        user.present? && ( !wiki.private || wiki.user_id == user.id || user.admin? )
+        editable?
     end
     
     def destroy?
-        wiki.user_id == user.id || user.admin?
+        self.author? || user.admin?
+    end
+    
+    # non view-related methods
+    
+    def author?
+        wiki.user_id == user.id
+    end
+    
+    def editable?
+        self.author? || user.admin? || !wiki.private?
     end
     
 end

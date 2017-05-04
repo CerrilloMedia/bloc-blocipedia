@@ -15,4 +15,13 @@ class User < ActiveRecord::Base
     self.role ||= :standard
   end
   
+  def downgrade_wikis
+      wikis = Wiki.where("user_id <= ? AND private <= ?", self.id, true)
+      
+      wikis.each do |w|
+          puts "Editing #{w}"
+         w.update_attributes(private: false)
+      end
+  end
+  
 end

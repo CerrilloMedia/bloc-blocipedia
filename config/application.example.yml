@@ -1,0 +1,3 @@
+# stripe
+STRIPE_PUBLISHABLE_KEY: # currently set to Stripes Test Secret Key
+STRIPE_SECRET_KEY: # currently set to Stripes Test Publishable Key

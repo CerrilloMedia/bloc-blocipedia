@@ -6,6 +6,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
@@ -71,23 +72,5 @@ class WikisController < ApplicationController
   def wiki_params
     params.require(:wiki).permit(:title, :body, :private)
   end
-  
-  # def authorized_to_edit?
-  #   wiki = Wiki.find(params[:id])
-    
-  #   unless current_user.id == wiki.user_id || !wiki.private
-  #     flash[:alert] = "You are not authorized to edit this Wiki."
-  #     redirect_to wiki
-  #   end
-  # end
-  
-  # def authorized_to_delete?
-  #   wiki = Wiki.find(params[:id])
-    
-  #   unless current_user.id == wiki.user_id
-  #     flash[:alert] = "You are not authorized to delete this Wiki."
-  #     redirect_to wikis_path
-  #   end
-  # end
   
 end

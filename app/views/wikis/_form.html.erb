@@ -18,11 +18,13 @@
         <%= f.label :body %>
         <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: 'Enter markdown here' %>
     <% end %>
-    <div class="form-group">
-        <%= f.label :private, class: 'checkbox' do %>
-            <%= f.check_box :private %> Private Wiki
-        <% end %>
-    </div>
+    <% if current_user.premium? || current_user.admin? || policy(wiki).author? %>
+        <div class="form-group">
+            <%= f.label :private, class: 'checkbox' do %>
+                <%= f.check_box :private %> Private Wiki
+            <% end %>
+        </div>
+    <% end %>
     <div class="form_group">
         <%= f.submit type, class: 'btn btn-success' %>
     </div>

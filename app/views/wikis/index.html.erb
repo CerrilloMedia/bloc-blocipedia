@@ -6,16 +6,16 @@
 </div>
 
 <div class="col-md-12">
-<h3>Current Wiki's</h3>
+<h3>Hot off the press!</h3>
 <div class="media-body">
     <% @wikis.each do |w| %>
-        <% if policy(w).edit? %>
+        <% if policy(w).editable? %>
             <%= link_to wiki_path(w), action: 'go', class: 'media' do %>
-                <div class="col-md-8 wiki-index-tile <%= 'wiki-tile-author' if policy(w).author? %>">
+                <div class="col-md-12 wiki-index-tile <%= 'wiki-tile-author' if policy(w).author? %>">
                     <h4>
                         <%= w.title %>
                     </h4>
-                    <%= content_tag :p, w.body, class: 'wiki-tile-body' %>
+                    <%= content_tag :p, texterize(markdown(w.body)), class: 'wiki-tile-body' %>
                     by: <%= w.user.email %><br/>
                 </div>
             <% end %>

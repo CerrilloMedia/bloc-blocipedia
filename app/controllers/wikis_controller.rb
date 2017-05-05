@@ -6,7 +6,7 @@ class WikisController < ApplicationController
 
   def show
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    authorize @wiki, :editable?
   end
 
   def new
@@ -16,6 +16,8 @@ class WikisController < ApplicationController
   def create
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user if current_user
+    
+    @wiki.body = markdown.render(params[:body])
     
     if @wiki.save
       flash[:notice] = "Wiki succesfully saved"
@@ -29,7 +31,7 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    authorize @wiki
+    authorize @wiki, :editable?
   end
 
   def update
@@ -39,8 +41,7 @@ class WikisController < ApplicationController
     # add expected data through wiki_params
     @wiki.assign_attributes(wiki_params)
     
-    # Pundit request for update? in WikiPolicy
-    authorize @wiki
+    authorize @wiki, :editable?
     
     if @wiki.save
       flash[:notice] = "Wiki succesfully saved"

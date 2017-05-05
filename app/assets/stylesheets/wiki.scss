@@ -8,14 +8,15 @@
 }
 
 .wiki-body-content {
-    padding: 1.5em .3em;
+    padding: 1.5em 1em;
     height: 7em !important;
-    background: rgba(187, 222, 188, 0.35);
+    background: rgba(155, 239, 26, 0.31) !important;
+    border-radius: 0 0 10px 10px;
 }
 
 .wiki-header {
-    background: #bbdebc;
-    box-shadow: -2px 2px 0px dimgrey;
+    background: #b1d28e;
+    box-shadow: 0px 0px 0px 3px rgb(92, 184, 92);
     padding: .3em;
     position: relative;
 }
@@ -30,7 +31,7 @@
 }
 
 .wiki-index-tile:hover {
-    background: #e1ffe1 !important;
+    background: rgba(155, 239, 26, 0.31) !important;
     text-decoration: none;
 }
 
@@ -51,3 +52,6 @@
     margin-left: 2em !important;
 }
 
+.form-control:focus {
+    
+}

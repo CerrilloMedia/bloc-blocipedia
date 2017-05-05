@@ -7,17 +7,17 @@ class WikiPolicy < ApplicationPolicy
         @wiki = wiki
     end
     
-    def show?
-        editable?
-    end
+    # def show?
+    #     editable?
+    # end
     
-    def edit?
-        editable?
-    end
+    # def edit?
+    #     editable?
+    # end
     
-    def update?
-        editable?
-    end
+    # def update?
+    #     editable?
+    # end
     
     def destroy?
         self.author? || user.admin?

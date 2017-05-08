@@ -17,7 +17,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user if current_user
     
-    @wiki.body = markdown.render(params[:body])
+    authorize @wiki, :editable?
     
     if @wiki.save
       flash[:notice] = "Wiki succesfully saved"
@@ -31,7 +31,6 @@ class WikisController < ApplicationController
 
   def edit
     @wiki = Wiki.find(params[:id])
-    authorize @wiki, :editable?
   end
 
   def update

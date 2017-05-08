@@ -16,7 +16,7 @@
                         <%= w.title %>
                     </h4>
                     <%= content_tag :p, texterize(markdown(w.body)), class: 'wiki-tile-body' %>
-                    by: <%= w.user.email %><br/>
+                    by: <%= policy(w).author.email %><br/>
                 </div>
             <% end %>
         <% end %>

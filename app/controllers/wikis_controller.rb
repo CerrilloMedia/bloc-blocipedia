@@ -1,12 +1,14 @@
 class WikisController < ApplicationController
   
   def index
-    @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+    # @wikis = Wiki.all
   end
 
   def show
     @wiki = Wiki.find(params[:id])
-    authorize @wiki, :editable?
+    authorize @wiki, :can_edit?
+    @collaborations = @wiki.collaborations
   end
 
   def new
@@ -17,7 +19,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user if current_user
     
-    authorize @wiki, :editable?
+    authorize @wiki
     
     if @wiki.save
       flash[:notice] = "Wiki succesfully saved"
@@ -40,7 +42,7 @@ class WikisController < ApplicationController
     # add expected data through wiki_params
     @wiki.assign_attributes(wiki_params)
     
-    authorize @wiki, :editable?
+    authorize @wiki, :can_edit?
     
     if @wiki.save
       flash[:notice] = "Wiki succesfully saved"

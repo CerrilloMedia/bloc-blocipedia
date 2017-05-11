@@ -18,7 +18,7 @@
         <%= f.label :body %>
         <%= f.text_area :body, rows: 10, class: 'form-control', placeholder: 'Enter markdown here' %>
     <% end %>
-    <% if policy(wiki).editable? %>
+    <% if policy(wiki).can_edit? && !current_user.standard? %>
         <div class="form-group">
             <%= f.label :private, class: 'checkbox' do %>
                 <%= f.check_box :private %> Private Wiki

@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   
   has_many :wikis, dependent: :destroy
   
+  has_many :collabrations
+  has_many :shared_wikis, through: :collabrations, source: :wiki
+  
   after_initialize :default_role
   
   devise :database_authenticatable, :registerable,

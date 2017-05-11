@@ -30,3 +30,22 @@ background: orange;
 .jumbotron {
     background: rgba(155, 239, 26, 0.31) !important;
 }
+
+.glyphicon-lock,
+.glyphicon-user {
+    font-size:.9em;
+    padding: 0 .5em 0 .2em;
+}
+
+a.media:hover {
+    text-decoration: none;
+}
+
+a {
+    color: rgb(57, 125, 57);
+}
+
+a:focus,
+a:hover {
+    color: rgb(38, 93, 29);
+}

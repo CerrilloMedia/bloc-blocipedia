@@ -13,19 +13,23 @@
     <!--NAVIGATION BAR-->
     <ul  class="nav nav-tabs">
       <li><%= link_to 'Home', root_path, title: "Blocipedia" %></li>
-      <li><%= link_to 'Show', wikis_path, { title: "All the Wikis" } %></li>
+      <li><%= link_to 'Show', wikis_path, { title: "All the things..." } %></li>
       <% if user_signed_in? %>
         <li>
           <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'navbar-link' %>
         </li>
         <li>
-          <% if current_user.standard? %>
-            <%= link_to new_charge_path do%>
-              Upgrade <span class="glyphicon glyphicon-star-empty"></span>
+          <% if current_user.admin? %>
+            <%= link_to edit_user_registration_path, options = {title: 'You are the master of this domain'} do %>
+              ADMIN <span class="glyphicon glyphicon-fire"></span>
             <% end %>
-          <% else %>
+          <% elsif current_user.premium? %>
             <%= link_to edit_user_registration_path, options = {title: 'Membership Status'} do %>
               Premium <span class="glyphicon glyphicon-star"></span>
+            <% end %>
+          <% else %>
+            <%= link_to new_charge_path do%>
+              Upgrade <span class="glyphicon glyphicon-star-empty"></span>
             <% end %>
           <% end %>
         </li>

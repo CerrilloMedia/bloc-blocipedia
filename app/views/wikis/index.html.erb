@@ -6,19 +6,23 @@
 </div>
 
 <div class="col-md-12">
-<h3>Hot off the press!</h3>
+<h3><%= @wikis.count %> Wikis Hot off the press!</h3>
 <div class="media-body">
-    <% @wikis.each do |w| %>
-        <% if policy(w).editable? %>
-            <%= link_to wiki_path(w), action: 'go', class: 'media' do %>
-                <div class="col-md-12 wiki-index-tile <%= 'wiki-tile-author' if policy(w).author? %>">
+    <% @wikis.each do |wiki| %>
+            <%= link_to wiki, action: 'go', class: 'media' do %>
+                <div class="col-md-12 wiki-index-tile <%= 'wiki-tile-author' if policy(wiki).author? %>" >
                     <h4>
-                        <%= w.title %>
+                        <%= wiki.title %>
                     </h4>
-                    <%= content_tag :p, texterize(markdown(w.body)), class: 'wiki-tile-body' %>
-                    by: <%= policy(w).author.email %><br/>
+                    <%= content_tag :p, texterize(markdown(wiki.body)), class: 'wiki-tile-body' %>
+                    by: <%= policy(wiki).author.email %>&nbsp;
+                    <% if policy(wiki).is_collaborator? %>
+                        <span class="glyphicon glyphicon-user" title="You are a collaborator"></span>
+                    <% end %>
+                    <% if wiki.private? %>
+                        <span class="glyphicon glyphicon-lock" title="This wiki is private"></span>
+                    <% end %>
                 </div>
             <% end %>
-        <% end %>
     <% end %>
 </div>

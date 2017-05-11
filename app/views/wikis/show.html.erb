@@ -5,17 +5,40 @@
         Author: <%= @wiki.user.email %><br/>
         <% if @wiki.private? %>
             <small>
-                <%= content_tag :span, nil, class: 'glyphicon glyphicon-lock', title: "private post" %> private
+                <%= content_tag :span, nil, class: 'glyphicon glyphicon-lock', title: "private post" %> this is a private wiki
             </small>
         <% end %>
     </div>
     <div class="wiki-body-content media-body">
         <%= content_tag :p, markdown(@wiki.body), class: 'wiki-tile-body' %>
-    </div>
+    </div><br/>
+    <% if @wiki.private? && @wiki.collaborations %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span>Current collaborators</span>
+                <div class="add-collaboration pull-right">
+                    <%= render partial: 'collaborations/form', locals: { wiki: @wiki } %>
+                </div>
+            </div>
+            <div class="panel-body">
+                <% @collaborations.each do |collab|  %>
+                    <div class="col-md-3">
+                        <% if policy(collab).destroy? %>
+                            <%= link_to [@wiki,collab], class: 'btn btn-default', method: :delete do %>
+                                <%= collab.user.email %>&nbsp;
+                                <span class="glyphicon glyphicon-remove"> </span>
+                            <% end %>
+                        <% else %>
+                            <%= collab.user.email %>
+                        <% end %>
+                    </div>
+                <% end %>
+            </div>
+            </div>
+    <% end %>
 </div>
-
 <div class="col-md-12 process-links">
-<% if policy(@wiki).editable? %>
+<% if policy(@wiki).can_edit? %>
     <%= link_to raw("<span class=\"glyphicon glyphicon-wrench\"></span> Edit Wiki"), edit_wiki_path(@wiki), class: 'btn btn-success' %>
     <% if policy(@wiki).destroy? %>
         <%= link_to raw("<span class=\"glyphicon glyphicon-trash\"></span> Delete Wiki"), @wiki, method: :delete, class: 'btn btn-warning', data: { confirm: "Are you sure you would like to delete this Wiki?" } %>

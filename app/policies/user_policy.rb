@@ -6,4 +6,9 @@ class UserPolicy < ApplicationPolicy
       @user = user
    end
    
+   def is_author?
+      @wiki.user_id == user.id
+   end
+   
+   
 end

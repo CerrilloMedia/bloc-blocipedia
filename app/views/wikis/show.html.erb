@@ -2,14 +2,14 @@
 <% if @wiki.private? %>
 <div class="col-xs-12">
     <small>
-        <%= content_tag :span, nil, class: 'glyphicon glyphicon-lock', title: "private post" %> private wiki
+        <%= content_tag :span, nil, class: 'glyphicon glyphicon-lock', title: "private post" %> private convo
     </small>
 </div>
 <% end %>
 
 <div class="media wiki-body col-md-10 col-xs-12">
     <div class="wiki-header">
-        <%= @wiki.user.email %>
+        by <%= @wiki.user.email %><span class="pull-right">published <%= time_ago_in_words(@wiki.updated_at) %></span>
     </div>
     <div class="wiki-body-content media-body">
         <%= content_tag :p, markdown(@wiki.body), class: 'wiki-tile-body' %>
@@ -17,13 +17,13 @@
     
     <% if @wiki.private? && @wiki.collaborations %>
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading col-xs-12">
                 <span>Current collaborators</span>
                 <div class="add-collaboration pull-right">
                     <%= render partial: 'collaborations/form', locals: { wiki: @wiki } %>
                 </div>
             </div>
-            <div class="panel-body">q
+            <div class="panel-body">
                 <% @collaborations.each do |collab|  %>
                     <div class="panel-heading pull-left">
                         <% if policy(collab).destroy? %>
@@ -40,7 +40,7 @@
             </div>
     <% end %>
 </div>
-<div class="col-md-12 process-links">
+<div class="col-md-2 col-xs-12 process-links">
 <% if policy(@wiki).can_edit? %>
     <%= link_to raw("<span class=\"glyphicon glyphicon-wrench\"></span> Edit Wiki"), edit_wiki_path(@wiki), class: 'btn btn-success' %>
     <% if policy(@wiki).destroy? %>

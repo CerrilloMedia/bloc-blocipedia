@@ -6,7 +6,9 @@
 </div>
 
 <div class="col-md-12">
-<h3><%= @wikis.count %> <%= pluralize(@wikis.count, 'idea') %> or <%= pluralize(@wikis.count, 'conversation') %> happening. right. now.</h3>
+<h3>
+    <%= @wikis.count %> <%= 'idea'.pluralize(@wikis.count) %> or <%= 'conversation'.pluralize(@wikis.count) %> happening. right. now.
+</h3>
 <div class="media-body">
     <% @wikis.each do |wiki| %>
             <%= link_to wiki, action: 'go', class: 'media' do %>

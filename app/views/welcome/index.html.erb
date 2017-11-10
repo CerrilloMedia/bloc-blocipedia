@@ -1,15 +1,56 @@
 <div class="jumbotron">
-    <h3>
+    
         <% if current_user %>
-            Returning as: <%= current_user.email %>
+        <div class="panel-heading large">
+            <h3>Welcome back <span class="j-header"><%= current_user.email %></span>!</h3>
+        </div>
+            <% if current_user.wikis.any? %>
+                <div class="panel-heading row">
+                    <div>Your most recent entries:</div>
+                    <ul class="">
+                        <% current_user.wikis.take(4).each_with_index do | w, i | %>
+                            <li class="">
+                                <%= link_to wiki_path(w.id) do %>
+                                    <%= (i.to_i + 1) %>: <%= w.title %>
+                                <% end %>
+                            </li>
+                        <% end %>
+                    </ul>
+                </div>
+            <% end %><hr>
             <%= link_to raw("<span class=\"glyphicon glyphicon-edit\"></span> New Post"), new_wiki_path, class: 'btn btn-success'%>
         <% else %>
-        Stay tuned! so perhaps you should 
-            <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link' %> or 
-            <%= link_to "Sign In", new_user_session_path, class: 'navbar-link' %>
+        <div class="panel-heading large">
+            <h3>Where idea's meet deadlines!<br/></h3>
+            <%= link_to "Sign up", new_user_registration_path, class: 'btn btn-success' %> or 
+            <%= link_to "Sign In", new_user_session_path, class: 'btn btn-default' %>
+        </div>
         <% end %>
-    </h3>
+    
 </div>
-<% if current_user %>
-    <%= link_to "This is what you missed on last weeks episode...", wikis_path, class: 'btn home-pg-btn', title: "click-it or ticket!" %>
-<% end %>
+<div class="col-xs-12">
+    <% if current_user %>
+        <%= link_to "This is what you missed on last weeks episode...", wikis_path, class: 'btn home-pg-btn col-sm-6 col-xs-12', title: "click-it or ticket!" %>
+    <% else %>
+        <div class="col-xs-12">
+            <div class="panel-heading text-center h3">
+                Have a wonderful idea you'd like feedback on?<br>This is the perfect place for sharing and creating content.
+            </div>
+            <div class="panel-body">
+                <div class="col-xs-12 col-sm-4 panel-body well">
+                    Convo.io is the perfect place to generate quick ideas on the go!
+                </div>
+                <div class="col-xs-12 col-sm-4 panel-body well">
+                    Add collaborators to help streamline the editing process
+                </div>
+                <div class="col-xs-12 col-sm-4 panel-body well">
+                    generate private wiki's for drafting prior to adding collaborators
+                </div>
+            </div>
+            <div class="panel-footer">
+                
+            </div>
+            
+        </div>
+    <% end %>
+</div>

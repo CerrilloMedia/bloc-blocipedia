@@ -20,7 +20,7 @@ users = User.all
         title: Faker::Lorem.sentence(5),
         body: Faker::Lorem.paragraph(3,false,4),
         user: users.sample,
-        private: [true,false, false].sample
+        private: [true, false, false].sample
         )
 end
 

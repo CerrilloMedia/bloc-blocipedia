@@ -29,6 +29,19 @@ background: orange;
 
 .jumbotron {
     background: rgba(155, 239, 26, 0.31) !important;
+    a:hover {
+        text-decoration: none;
+    }
+    .j-header {
+        font-size: 1.2em;
+    }
+    ul {
+        padding-left: .5em;
+    }
+    li {
+        font-size: 1.2em;
+        list-style: none;
+    }
 }
 
 .glyphicon-lock,
@@ -48,4 +61,8 @@ a {
 a:focus,
 a:hover {
     color: rgb(38, 93, 29);
+}
+
+.nav-tabs > li > a {
+    border-radius: 0px;
 }

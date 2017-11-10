@@ -1,12 +1,12 @@
 <h1>So what's on your grey matter?</h1>
 <div class="media">
     <div class="media-body">
-        <%= link_to "Get Wiki With-it", new_wiki_path, class: 'btn btn-success wiki-index-btn', title: "Create Wiki" %>
+        <%= link_to "add new", new_wiki_path, class: 'btn btn-success wiki-index-btn', title: "Create Wiki" %>
     </div>
 </div>
 
 <div class="col-md-12">
-<h3><%= @wikis.count %> Wikis Hot off the press!</h3>
+<h3><%= @wikis.count %> ideas and conversations happening. right. now.</h3>
 <div class="media-body">
     <% @wikis.each do |wiki| %>
             <%= link_to wiki, action: 'go', class: 'media' do %>

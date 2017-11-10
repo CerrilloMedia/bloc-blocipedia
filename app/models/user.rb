@@ -14,6 +14,8 @@ class User < ActiveRecord::Base
   
   enum role: [:standard, :premium, :admin]
   
+  before_create :limit_users
+  
   def default_role
     self.role ||= :standard
   end
@@ -25,6 +27,10 @@ class User < ActiveRecord::Base
           puts "Editing #{w}"
          w.update_attributes(private: false)
       end
+  end
+  
+  def limit_users
+    User.all.count > 2
   end
   
 end

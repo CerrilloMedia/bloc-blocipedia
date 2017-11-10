@@ -1,17 +1,20 @@
 <h1><%= @wiki.title %></h1>
+<% if @wiki.private? %>
+<div class="col-xs-12">
+    <small>
+        <%= content_tag :span, nil, class: 'glyphicon glyphicon-lock', title: "private post" %> private wiki
+    </small>
+</div>
+<% end %>
 
-<div class="media wiki-body col-md-10">
+<div class="media wiki-body col-md-10 col-xs-12">
     <div class="wiki-header">
-        Author: <%= @wiki.user.email %><br/>
-        <% if @wiki.private? %>
-            <small>
-                <%= content_tag :span, nil, class: 'glyphicon glyphicon-lock', title: "private post" %> this is a private wiki
-            </small>
-        <% end %>
+        <%= @wiki.user.email %>
     </div>
     <div class="wiki-body-content media-body">
         <%= content_tag :p, markdown(@wiki.body), class: 'wiki-tile-body' %>
     </div><br/>
+    
     <% if @wiki.private? && @wiki.collaborations %>
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -20,11 +23,11 @@
                     <%= render partial: 'collaborations/form', locals: { wiki: @wiki } %>
                 </div>
             </div>
-            <div class="panel-body">
+            <div class="panel-body">q
                 <% @collaborations.each do |collab|  %>
-                    <div class="col-md-3">
+                    <div class="panel-heading pull-left">
                         <% if policy(collab).destroy? %>
-                            <%= link_to [@wiki,collab], class: 'btn btn-default', method: :delete do %>
+                            <%= link_to [@wiki,collab], class: 'btn btn-default', method: :delete, data: {confirm: "Are you sure you want to remove #{collab.user.email.upcase} as a collaborator?"} do %>
                                 <%= collab.user.email %>&nbsp;
                                 <span class="glyphicon glyphicon-remove"> </span>
                             <% end %>

@@ -9,7 +9,7 @@
 
 <div class="media wiki-body col-md-10 col-xs-12">
     <div class="wiki-header">
-        by <%= @wiki.user.email %><span class="pull-right">published <%= time_ago_in_words(@wiki.updated_at) %></span>
+        by <%= @wiki.user.email %><span class="pull-right">published <%= time_ago_in_words(@wiki.updated_at) %> ago</span>
     </div>
     <div class="wiki-body-content media-body">
         <%= content_tag :p, markdown(@wiki.body), class: 'wiki-tile-body' %>
